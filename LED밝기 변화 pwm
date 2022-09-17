@@ -1,0 +1,19 @@
+// C++ code
+//LED 밝기 변화
+void setup()
+{
+ pinMode(10,OUTPUT);
+}
+void loop()
+{
+  for(int i=0;i<=256;i++)
+  {
+    analogWrite(10,i); //아날로그 pwm
+    delay(10); //0.01초
+  }
+  for(int i=255;i>=0;i--)
+  {
+    analogWrite(10,i); //아날로그 pwm
+    delay(10); //0.01초
+  }
+}
