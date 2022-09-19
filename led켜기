@@ -1,17 +1,24 @@
-const int led=9; //신호값
+const int led=9;
 void setup() {
   // put your setup code here, to run once:
-pinMode(led,OUTPUT); //led 9번 아웃풋
+pinMode(led,OUTPUT);
 
  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for(int i=100;i<1000;i+=100) // delay를 늘리기 위해 for문
+  for(int i=100;i<=1000;i+=100)
   {
     digitalWrite(led,HIGH);
-    delay(i); 
+    delay(i);
+    digitalWrite(led,LOW);
+    delay(i);
+  }
+  for(int i=1000;i<=100;i-=100)
+  {
+    digitalWrite(led,HIGH);
+    delay(i);
     digitalWrite(led,LOW);
     delay(i);
   }
