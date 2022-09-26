@@ -1,0 +1,24 @@
+const int LED = 9;       // LED는 9번 핀에 연결
+const int BUTTON = 2;       // 버튼은 2번 핀에 연결      // LED의 현재 상태 (on/off)
+
+void setup()
+{
+  pinMode (LED, OUTPUT);    // LED 핀을 출력으로 설정
+  pinMode (BUTTON, INPUT);    // 버튼 핀을 입력으로 설정 (생략 가능)
+}
+
+/*
+  디바운싱 함수
+  버튼의 이전 상태를 매개변수로 전달하면
+  디바운싱된 버튼의 현재 상태를 얻을 수 있다.
+*/
+
+void loop()
+{
+  if(digitalRead(BUTTON)== 1)
+  {
+    digitalWrite(LED,HIGH);
+  }else{
+    digitalWrite(LED,LOW);
+  }
+}//https://m.blog.naver.com/dkwltmdgus/220407441365
