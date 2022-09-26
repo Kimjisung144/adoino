@@ -36,3 +36,4 @@ void loop()
   lastButton = currentButton;     // 이전 버튼 상태를 현재 버튼 상태로 설정
   digitalWrite(LED, ledOn);     // LED 상태 변경
 }
+//https://m.blog.naver.com/dkwltmdgus/220531785804
