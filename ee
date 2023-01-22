@@ -1,0 +1,59 @@
+#include<Servo.h>
+const int echoPin = 12;
+const int trigPin = 13;
+const int red = 7;
+const int green = 6;
+const int blue = 5;
+
+
+Servo myservo;
+int pos = 0;
+void setup() {
+	Serial.begin(9600);
+  myservo.attach(10);
+	// trig를 출력모드로 설정, echo를 입력모드로 설정
+	pinMode(trigPin, OUTPUT);
+	pinMode(echoPin, INPUT);
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(blue, OUTPUT);
+
+}
+
+void loop() {
+
+	
+	// 초음파를 보낸다. 다 보내면 echo가 HIGH 상태로 대기하게 된다.
+  digitalWrite(blue,LOW);
+  digitalWrite(red,HIGH);
+  digitalWrite(trigPin, LOW);
+  digitalWrite(echoPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+	
+	// echoPin 이 HIGH를 유지한 시간을 저장 한다.
+  unsigned long duration = pulseIn(echoPin, HIGH); 
+	// HIGH 였을 때 시간(초음파가 보냈다가 다시 들어온 시간)을 가지고 거리를 계산 한다.
+	float distance = ((float)(340 * duration) / 10000) / 2;  
+	if(distance < 7)
+  {
+    digitalWrite(blue, HIGH);
+    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+      myservo.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  delay(5000);
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+      myservo.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  }
+	Serial.print(distance);
+	Serial.println("cm");
+	// 수정한 값을 출력
+	delay(500);
+}
